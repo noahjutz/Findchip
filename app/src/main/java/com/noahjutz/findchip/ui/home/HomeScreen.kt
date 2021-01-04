@@ -1,8 +1,10 @@
 package com.noahjutz.findchip.ui.home
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BluetoothDisabled
 import androidx.compose.runtime.*
@@ -37,10 +39,12 @@ fun BluetoothDisabledAlert(
 
                 Spacer(Modifier.preferredHeight(24.dp))
 
-                Button(onClick = {
-                    showProgressIndicator = true
-                    viewModel.enableBluetooth()
-                }) {
+                Button(
+                    onClick = {
+                        showProgressIndicator = true
+                        viewModel.enableBluetooth()
+                    }
+                ) {
                     Text("Enable Bluetooth")
                 }
             }
