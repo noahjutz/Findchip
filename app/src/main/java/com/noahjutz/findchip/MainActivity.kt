@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MaterialTheme(colors = if (isSystemInDarkTheme()) darkColors() else lightColors()) {
                 Surface {
-                    HomeScreen()
+                    NavGraph()
                 }
             }
         }
