@@ -4,15 +4,23 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bluetooth
 import androidx.compose.ui.platform.setContent
-import com.noahjutz.findchip.ui.home.HomeScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme(colors = if (isSystemInDarkTheme()) darkColors() else lightColors()) {
-                Surface {
+                Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                    title = { Text("Findchip") },
+                                    navigationIcon = {IconButton(onClick = {}) {Icon(Icons.Default.Bluetooth)} }
+                            )
+                        }
+                ) {
                     NavGraph()
                 }
             }
