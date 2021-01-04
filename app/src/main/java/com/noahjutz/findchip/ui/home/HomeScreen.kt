@@ -15,17 +15,6 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
     navToDeviceDetails: (String) -> Unit
 ) {
-    BondedDeviceList(
-        viewModel,
-        navToDeviceDetails
-    )
-}
-
-@Composable
-fun BondedDeviceList(
-    viewModel: HomeViewModel,
-    navToDeviceDetails: (String) -> Unit
-) {
     val bondedDevices by viewModel.bondedDevices.collectAsState(initial = emptyList())
     LazyColumn {
         items(bondedDevices) { device ->
