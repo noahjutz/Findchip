@@ -1,5 +1,6 @@
 package com.noahjutz.findchip.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -13,19 +14,34 @@ import androidx.compose.ui.viewinterop.viewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel()
+    viewModel: HomeViewModel = viewModel(),
+    navToDeviceDetails: (String) -> Unit
 ) {
     val isBluetoothEnabled by viewModel.isBluetoothEnabled.collectAsState(initial = false)
-    if (isBluetoothEnabled) BondedDeviceList(viewModel)
-    else BluetoothDisabledAlert(viewModel)
+
+    if (isBluetoothEnabled) {
+        BondedDeviceList(
+            viewModel,
+            navToDeviceDetails
+        )
+    } else {
+        BluetoothDisabledAlert(
+            viewModel
+        )
+    }
 }
 
 @Composable
-fun BondedDeviceList(viewModel: HomeViewModel) {
+fun BondedDeviceList(
+    viewModel: HomeViewModel,
+    navToDeviceDetails: (String) -> Unit
+) {
     val bondedDevices by viewModel.bondedDevices.collectAsState(initial = emptyList())
     LazyColumn {
         items(bondedDevices) { device ->
-            ListItem {
+            ListItem(Modifier.clickable(onClick = {
+                navToDeviceDetails(device.address)
+            })) {
                 Text(device.name)
             }
         }
