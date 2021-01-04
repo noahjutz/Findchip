@@ -1,16 +1,16 @@
-package com.noahjutz.findchip.ui.home
+package com.noahjutz.findchip
 
 import android.bluetooth.BluetoothAdapter
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 
-class HomeViewModel : ViewModel() {
+class NavGraphViewModel : ViewModel() {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
-    val bondedDevices = flow {
+    val isBluetoothEnabled = flow {
         while (true) {
-            emit(bluetoothAdapter.bondedDevices.toList())
+            emit(bluetoothAdapter.isEnabled)
             delay(500)
         }
     }
