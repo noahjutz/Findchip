@@ -11,10 +11,11 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.noahjutz.findchip.ui.bluetooth_disabled_alert.BluetoothDisabledAlert
 import com.noahjutz.findchip.ui.home.HomeScreen
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun NavGraph(
-    viewModel: NavGraphViewModel = viewModel()
+    viewModel: NavGraphViewModel = getViewModel()
 ) {
     val navController = rememberNavController()
 
