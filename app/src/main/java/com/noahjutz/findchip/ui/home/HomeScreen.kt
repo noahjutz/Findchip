@@ -1,10 +1,8 @@
 package com.noahjutz.findchip.ui.home
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BluetoothDisabled
 import androidx.compose.runtime.*
@@ -18,8 +16,20 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel()
 ) {
     val isBluetoothEnabled by viewModel.isBluetoothEnabled.collectAsState(initial = false)
-    if (isBluetoothEnabled) Text("BT Enabled")
+    if (isBluetoothEnabled) BondedDeviceList(viewModel)
     else BluetoothDisabledAlert(viewModel)
+}
+
+@Composable
+fun BondedDeviceList(viewModel: HomeViewModel) {
+    val bondedDevices by viewModel.bondedDevices.collectAsState(initial = emptyList())
+    LazyColumn {
+        items(bondedDevices) { device ->
+            ListItem {
+                Text(device.name)
+            }
+        }
+    }
 }
 
 @Composable

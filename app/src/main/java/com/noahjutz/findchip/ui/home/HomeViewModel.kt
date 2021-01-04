@@ -15,5 +15,12 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+    val bondedDevices = flow {
+        while (true) {
+            emit(bluetoothAdapter.bondedDevices.toList())
+            delay(500)
+        }
+    }
+
     fun enableBluetooth() = bluetoothAdapter.enable()
 }
