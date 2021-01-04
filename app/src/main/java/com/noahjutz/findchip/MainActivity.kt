@@ -13,14 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme(colors = if (isSystemInDarkTheme()) darkColors() else lightColors()) {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = { Text("Findchip") },
-                            navigationIcon = { IconButton(onClick = {}) { Icon(Icons.Default.Bluetooth) } }
-                        )
-                    }
-                ) {
+                Scaffold {
                     NavGraph()
                 }
             }
