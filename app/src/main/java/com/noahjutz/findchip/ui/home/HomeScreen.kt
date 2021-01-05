@@ -18,7 +18,7 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Findchip") },
-                navigationIcon = { IconButton(onClick = {}) { Icon(vectorResource(id = R.drawable.ic_brand)) } }
+                navigationIcon = { IconButton(onClick = {}) { Icon(vectorResource(id = R.drawable.ic_launcher_foreground)) } }
             )
         }
     ) {
