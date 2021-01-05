@@ -1,12 +1,15 @@
 package com.noahjutz.findchip.ui.entry_point
 
+import android.app.Application
 import android.bluetooth.BluetoothAdapter
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 
-class FindchipAppViewModel : ViewModel() {
-    private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+class FindchipAppViewModel(
+    private val bluetoothAdapter: BluetoothAdapter,
+    private val application: Application
+) : ViewModel() {
 
     val isBluetoothEnabled = flow {
         while (true) {
