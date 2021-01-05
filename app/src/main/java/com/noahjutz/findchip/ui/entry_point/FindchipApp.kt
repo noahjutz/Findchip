@@ -16,8 +16,8 @@ fun FindchipApp(
 ) {
     Scaffold {
         NavGraph()
-        val isBluetoothEnabled by viewModel.isBluetoothEnabled.collectAsState(initial = true)
-        if (!isBluetoothEnabled) {
+        val isBluetoothDisabled by viewModel.isBluetoothDisabled.collectAsState(initial = true)
+        if (isBluetoothDisabled) {
             AlertDialog(
                 onDismissRequest = {},
                 confirmButton = {

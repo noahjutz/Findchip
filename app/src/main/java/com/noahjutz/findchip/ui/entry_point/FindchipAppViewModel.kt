@@ -11,9 +11,9 @@ class FindchipAppViewModel(
     private val application: Application
 ) : ViewModel() {
 
-    val isBluetoothEnabled = flow {
+    val isBluetoothDisabled = flow {
         while (true) {
-            emit(bluetoothAdapter.isEnabled)
+            emit(!bluetoothAdapter.isEnabled)
             delay(500)
         }
     }
