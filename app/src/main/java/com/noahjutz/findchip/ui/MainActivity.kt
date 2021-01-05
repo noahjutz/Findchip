@@ -1,4 +1,4 @@
-package com.noahjutz.findchip
+package com.noahjutz.findchip.ui
 
 import android.Manifest
 import android.content.pm.PackageManager

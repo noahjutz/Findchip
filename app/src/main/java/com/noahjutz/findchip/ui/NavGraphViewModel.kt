@@ -1,4 +1,4 @@
-package com.noahjutz.findchip
+package com.noahjutz.findchip.ui
 
 import android.app.Application
 import android.bluetooth.BluetoothAdapter

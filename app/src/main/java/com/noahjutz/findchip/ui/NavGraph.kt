@@ -1,10 +1,9 @@
-package com.noahjutz.findchip
+package com.noahjutz.findchip.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.onCommit
-import androidx.compose.ui.viewinterop.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
