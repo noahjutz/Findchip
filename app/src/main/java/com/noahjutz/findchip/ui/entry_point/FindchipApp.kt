@@ -16,6 +16,7 @@ fun FindchipApp(
 ) {
     Scaffold {
         NavGraph()
+
         val isBluetoothDisabled by viewModel.isBluetoothDisabled.collectAsState(initial = true)
         if (isBluetoothDisabled) {
             AlertDialog(
@@ -30,6 +31,26 @@ fun FindchipApp(
                 },
                 text = {
                     Text("Bluetooth is required.")
+                },
+            )
+        }
+
+        val isLocationPermissionMissing by viewModel.isLocationPermissionMissing.collectAsState(
+            initial = true
+        )
+        if (isLocationPermissionMissing) {
+            AlertDialog(
+                onDismissRequest = {},
+                confirmButton = {
+                    Button(onClick = { /*TODO*/ }) {
+                        Text("Grant permission")
+                    }
+                },
+                title = {
+                    Text("Location permission is missing.")
+                },
+                text = {
+                    Text("Location permission is required for Bluetooth Low Energy. If the button doesn't work, please go to App Info > Permissions > Location > Allow only while using the app.")
                 },
             )
         }
