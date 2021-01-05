@@ -14,4 +14,6 @@ class FindchipAppViewModel : ViewModel() {
             delay(500)
         }
     }
+
+    fun enableBluetooth() = bluetoothAdapter.enable()
 }

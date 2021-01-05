@@ -21,7 +21,7 @@ fun FindchipApp(
             AlertDialog(
                 onDismissRequest = {},
                 confirmButton = {
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = { viewModel.enableBluetooth() }) {
                         Text("Enable Bluetooth")
                     }
                 },
