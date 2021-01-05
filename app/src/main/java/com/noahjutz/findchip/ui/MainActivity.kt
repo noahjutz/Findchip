@@ -14,6 +14,7 @@ import androidx.compose.material.lightColors
 import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.noahjutz.findchip.ui.entry_point.FindchipApp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MaterialTheme(colors = if (isSystemInDarkTheme()) darkColors() else lightColors()) {
                 Scaffold {
-                    NavGraph()
+                    FindchipApp()
                 }
             }
         }
