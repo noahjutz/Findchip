@@ -16,20 +16,27 @@ class DeviceListViewModel(
     private val _devices = MutableStateFlow(emptyList<BluetoothDevice>())
     val devices = _devices.asStateFlow()
 
+    private val scanCallback = object : ScanCallback() {
+        override fun onScanResult(callbackType: Int, result: ScanResult?) {
+            super.onScanResult(callbackType, result)
+            result?.device?.let { device ->
+                when (callbackType) {
+                    ScanSettings.CALLBACK_TYPE_ALL_MATCHES -> if (device !in devices.value) _devices.value += device
+                    ScanSettings.CALLBACK_TYPE_MATCH_LOST -> _devices.value -= device
+                }
+            }
+        }
+    }
+
+    private val scanFilters = listOf(ScanFilter.Builder().build()) // TODO
+
+    private val scanSettings = ScanSettings.Builder().build() // TODO
+
     init {
         bluetoothAdapter.bluetoothLeScanner.startScan(
-            listOf(ScanFilter.Builder().build()), // TODO
-            ScanSettings.Builder().build(), // TODO
-            object : ScanCallback() {
-                override fun onScanResult(callbackType: Int, result: ScanResult?) {
-                    super.onScanResult(callbackType, result)
-                    result?.device?.let { device ->
-                        when (callbackType) {
-                            ScanSettings.CALLBACK_TYPE_ALL_MATCHES -> if (device !in devices.value) _devices.value += device
-                            ScanSettings.CALLBACK_TYPE_MATCH_LOST -> _devices.value -= device
-                        }
-                    }
-                }
-            })
+            scanFilters,
+            scanSettings,
+            scanCallback,
+        )
     }
 }
