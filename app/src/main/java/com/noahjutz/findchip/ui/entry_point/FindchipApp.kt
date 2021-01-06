@@ -12,7 +12,8 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun FindchipApp(
-    viewModel: FindchipAppViewModel = getViewModel()
+    viewModel: FindchipAppViewModel = getViewModel(),
+    requestLocationPermission: () -> Unit
 ) {
     Scaffold {
         NavGraph()
@@ -42,7 +43,7 @@ fun FindchipApp(
             AlertDialog(
                 onDismissRequest = {},
                 confirmButton = {
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = requestLocationPermission) {
                         Text("Grant permission")
                     }
                 },
