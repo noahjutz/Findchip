@@ -1,5 +1,6 @@
 package com.noahjutz.findchip.ui.device_list
 
+import android.bluetooth.BluetoothDevice
 import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -38,7 +39,7 @@ fun DeviceList(
                             Text("Address: ${device.address}")
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
                                 Text("Alias: ${device.alias}")
-                            Text("BT Class: ${device.bluetoothClass}")
+                            Text("BT Class: ${device.bluetoothClass.majorDeviceClass} / ${device.bluetoothClass.deviceClass}")
                             Text("Bond State: ${device.bondState}")
                             Text("Type: ${device.type}")
                             Text("UUIDs: ${device.uuids}")
