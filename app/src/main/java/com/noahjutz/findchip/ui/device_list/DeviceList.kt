@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -24,11 +25,16 @@ fun DeviceList(
     val isScanning by viewModel.isScanning.collectAsState()
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("DeviceList $isScanning") },
-                navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground)) } },
-                actions = { IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) } }
-            )
+            Column {
+                TopAppBar(
+                    title = { Text("DeviceList") },
+                    navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground)) } },
+                    actions = { IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) } }
+                )
+                if (isScanning) {
+                    LinearProgressIndicator(Modifier.fillMaxWidth())
+                }
+            }
         }
     ) {
         val devices by viewModel.devices.collectAsState()
