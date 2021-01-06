@@ -18,7 +18,8 @@ fun NavGraph() {
 
         composable("deviceDetails") {
             DeviceDetails(
-                popBackStack = { /* TODO */ }
+                popBackStack = { /* TODO */ },
+                address = "TODO"
             )
         }
     }
