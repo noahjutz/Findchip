@@ -16,44 +16,36 @@ fun FindchipApp(
     requestLocationPermission: () -> Unit
 ) {
     Scaffold {
-        NavGraph()
-
         val isBluetoothDisabled by viewModel.isBluetoothDisabled.collectAsState(initial = true)
-        if (isBluetoothDisabled) {
-            AlertDialog(
-                onDismissRequest = {},
-                confirmButton = {
-                    Button(onClick = { viewModel.enableBluetooth() }) {
-                        Text("Enable Bluetooth")
-                    }
-                },
-                title = {
-                    Text("Bluetooth is disabled.")
-                },
-                text = {
-                    Text("Bluetooth is required.")
-                },
-            )
-        }
-
-        val isLocationPermissionMissing by viewModel.isLocationPermissionMissing.collectAsState(
-            initial = true
-        )
-        if (isLocationPermissionMissing) {
-            AlertDialog(
-                onDismissRequest = {},
-                confirmButton = {
-                    Button(onClick = requestLocationPermission) {
-                        Text("Grant permission")
-                    }
-                },
-                title = {
-                    Text("Location permission is missing.")
-                },
-                text = {
-                    Text("Location permission is required for Bluetooth Low Energy. If the button doesn't work, please go to App Info > Permissions > Location > Allow only while using the app.")
-                },
-            )
+        val isLocationPermissionMissing by viewModel.isLocationPermMissing.collectAsState(initial = true)
+        when {
+            isBluetoothDisabled -> BluetoothAlert { viewModel.enableBluetooth() }
+            isLocationPermissionMissing -> LocationPermissionAlert(requestLocationPermission)
+            else -> NavGraph()
         }
     }
+}
+
+@Composable
+private fun BluetoothAlert(
+    enableBluetooth: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = {},
+        confirmButton = { Button(onClick = enableBluetooth) { Text("Enable Bluetooth") } },
+        title = { Text("Bluetooth is disabled.") },
+        text = { Text("Bluetooth is required.") },
+    )
+}
+
+@Composable
+private fun LocationPermissionAlert(
+    requestPermission: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = {},
+        confirmButton = { Button(onClick = requestPermission) { Text("Grant permission") } },
+        title = { Text("Location permission is missing.") },
+        text = { Text("Location permission is required for Bluetooth Low Energy. If the button doesn't work, please go to App Info > Permissions > Location > Allow only while using the app.") },
+    )
 }

@@ -22,7 +22,7 @@ class FindchipAppViewModel(
         }
     }
 
-    val isLocationPermissionMissing = flow {
+    val isLocationPermMissing = flow {
         while (true) {
             emit(
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
