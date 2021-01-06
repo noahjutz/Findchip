@@ -28,7 +28,8 @@ class DeviceListViewModel(
                     result?.device?.let { device ->
                         when (callbackType) {
                             ScanSettings.CALLBACK_TYPE_ALL_MATCHES -> {
-                                _devices.value += device
+                                if (device !in devices.value) _devices.value += device
+
                             }
                             ScanSettings.CALLBACK_TYPE_MATCH_LOST -> {
                                 _devices.value -= device
