@@ -43,8 +43,21 @@ class DeviceDetailsViewModel(
         }
     }
 
-    fun startBeep() = write(hexStringToByteArray("a301"))
-    fun stopBeep() = write(hexStringToByteArray("a401"))
+    fun startBeep() {
+        write(hexStringToByteArray("a301"))
+        _isBeeping.value = true
+    }
+
+    fun stopBeep() {
+        write(hexStringToByteArray("a401"))
+        _isBeeping.value = false
+    }
+
+    fun toggleBeep() {
+        val payload = if (isBeeping.value) "a401" else "a301"
+        write(hexStringToByteArray(payload))
+        _isBeeping.value = !isBeeping.value
+    }
 
     private val gatt: BluetoothGatt =
         device.connectGatt(application.applicationContext, true, gattCallback)
@@ -54,6 +67,9 @@ class DeviceDetailsViewModel(
 
     private val _rssi = MutableStateFlow(0)
     val rssi = _rssi.asStateFlow()
+
+    private val _isBeeping = MutableStateFlow(false)
+    val isBeeping = _isBeeping.asStateFlow()
 
     init {
         viewModelScope.launch {

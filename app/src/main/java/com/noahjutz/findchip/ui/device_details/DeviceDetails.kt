@@ -40,11 +40,9 @@ private fun DeviceDetailsContent(
     viewModel: DeviceDetailsViewModel
 ) {
     Column {
-        Button(onClick = { viewModel.startBeep() }) {
-            Text("On")
-        }
-        TextButton(onClick = { viewModel.stopBeep() }) {
-            Text("Off")
+        val isBeeping by viewModel.isBeeping.collectAsState()
+        Button(onClick = { viewModel.toggleBeep() }) {
+            Text(if (isBeeping) "stop" else "start")
         }
 
         val rssi by viewModel.rssi.collectAsState()
