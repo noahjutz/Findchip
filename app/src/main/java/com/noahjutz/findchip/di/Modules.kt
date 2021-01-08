@@ -22,7 +22,10 @@ val koinModule = module {
     }
 
     viewModel { (device: BluetoothDevice) ->
-        DeviceDetailsViewModel(device = device)
+        DeviceDetailsViewModel(
+            device = device,
+            application = androidApplication()
+        )
     }
 
     viewModel {
