@@ -31,7 +31,7 @@ class DeviceDetailsViewModel(
         }
     }
 
-    fun write() {
+    fun write(value: ByteArray) {
         val serviceUUID = UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb")
         val service: BluetoothGattService? = gatt.getService(serviceUUID)
 
@@ -40,8 +40,7 @@ class DeviceDetailsViewModel(
 
         characteristic?.let {
             characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
-            characteristic.value = hexStringToByteArray("a301")
-                .also { Log.d(TAG, "byteArray: ${it.joinToString(",")}") }
+            characteristic.value = value
             gatt.writeCharacteristic(characteristic)
         }
     }

@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.noahjutz.findchip.util.hexStringToByteArray
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -38,10 +41,11 @@ private fun DeviceDetailsContent(
     viewModel: DeviceDetailsViewModel
 ) {
     Column {
-        Button(onClick = {
-            viewModel.write()
-        }) {
-            Text("submit")
+        Button(onClick = { viewModel.write(hexStringToByteArray("a301")) }) {
+            Text("On")
+        }
+        TextButton(onClick = { viewModel.write(hexStringToByteArray("a401")) }) {
+            Text("Off")
         }
     }
 }
