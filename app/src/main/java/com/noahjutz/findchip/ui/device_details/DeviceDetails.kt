@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.noahjutz.findchip.util.hexStringToByteArray
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -41,10 +40,10 @@ private fun DeviceDetailsContent(
     viewModel: DeviceDetailsViewModel
 ) {
     Column {
-        Button(onClick = { viewModel.write(hexStringToByteArray("a301")) }) {
+        Button(onClick = { viewModel.startBeep() }) {
             Text("On")
         }
-        TextButton(onClick = { viewModel.write(hexStringToByteArray("a401")) }) {
+        TextButton(onClick = { viewModel.stopBeep() }) {
             Text("Off")
         }
     }

@@ -31,7 +31,7 @@ class DeviceDetailsViewModel(
         }
     }
 
-    fun write(value: ByteArray) {
+    private fun write(value: ByteArray) {
         val serviceUUID = UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb")
         val service: BluetoothGattService? = gatt.getService(serviceUUID)
 
@@ -44,6 +44,9 @@ class DeviceDetailsViewModel(
             gatt.writeCharacteristic(characteristic)
         }
     }
+
+    fun startBeep() = write(hexStringToByteArray("a301"))
+    fun stopBeep() = write(hexStringToByteArray("a401"))
 
     private val gatt: BluetoothGatt =
         device.connectGatt(application.applicationContext, true, gattCallback)
