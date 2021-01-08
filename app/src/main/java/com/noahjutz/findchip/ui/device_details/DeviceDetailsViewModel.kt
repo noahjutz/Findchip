@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noahjutz.findchip.util.hexStringToByteArray
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -22,12 +23,9 @@ class DeviceDetailsViewModel(
             _isConnected.value = newState == BluetoothProfile.STATE_CONNECTED
         }
 
-        override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
-            super.onServicesDiscovered(gatt, status)
-            Log.d(
-                TAG,
-                "onServicesDiscovered: ${gatt?.services?.map { it.uuid }} ${gatt?.services?.map { it.characteristics.map { it.uuid } }}"
-            )
+        override fun onReadRemoteRssi(gatt: BluetoothGatt?, rssi: Int, status: Int) {
+            super.onReadRemoteRssi(gatt, rssi, status)
+            _rssi.value = rssi
         }
     }
 
@@ -54,11 +52,20 @@ class DeviceDetailsViewModel(
     private val _isConnected = MutableStateFlow(false)
     val isConnected = _isConnected.asStateFlow()
 
+    private val _rssi = MutableStateFlow(0)
+    val rssi = _rssi.asStateFlow()
+
     init {
         viewModelScope.launch {
             isConnected.collect {
                 if (!it) gatt.connect()
                 if (it) gatt.discoverServices()
+            }
+        }
+        viewModelScope.launch {
+            while (true) {
+                gatt.readRemoteRssi()
+                delay(500)
             }
         }
     }

@@ -46,6 +46,9 @@ private fun DeviceDetailsContent(
         TextButton(onClick = { viewModel.stopBeep() }) {
             Text("Off")
         }
+
+        val rssi by viewModel.rssi.collectAsState()
+        Text(rssi.toString())
     }
 }
 
