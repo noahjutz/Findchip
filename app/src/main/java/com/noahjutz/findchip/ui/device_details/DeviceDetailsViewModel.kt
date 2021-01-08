@@ -71,13 +71,13 @@ class DeviceDetailsViewModel(
     }
 }
 
-private fun hexStringToByteArray(input: String): ByteArray {
-    val data = ByteArray(input.length / 2)
-    var i = 0
-    while (i < input.length) {
-        data[i / 2] = ((Character.digit(input[i], 16) shl 4)
-                + Character.digit(input[i + 1], 16)).toByte()
-        i += 2
+@Suppress("SameParameterValue")
+private fun hexStringToByteArray(hex: String): ByteArray {
+    val data = ByteArray(hex.length / 2)
+    for (i in hex.indices step 2) {
+        data[i / 2] = (
+                (Character.digit(hex[i], 16) shl 4) + Character.digit(hex[i + 1], 16)
+                ).toByte()
     }
     return data
 }
