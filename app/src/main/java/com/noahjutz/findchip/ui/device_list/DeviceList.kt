@@ -1,5 +1,6 @@
 package com.noahjutz.findchip.ui.device_list
 
+import android.bluetooth.BluetoothDevice
 import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,7 +23,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun DeviceList(
     viewModel: DeviceListViewModel = getViewModel(),
-    navToDeviceDetails: (String) -> Unit
+    navToDeviceDetails: (BluetoothDevice) -> Unit
 ) {
     val isScanning by viewModel.isScanning.collectAsState()
     Scaffold(
@@ -44,7 +45,7 @@ fun DeviceList(
             LazyColumn {
                 items(devices) { device ->
                     ListItem(
-                        Modifier.clickable { navToDeviceDetails(device.address) },
+                        Modifier.clickable { navToDeviceDetails(device) },
                         text = {
                             Text(device.name?.takeIf { it.isNotBlank() } ?: "Unnamed Device")
                         },

@@ -15,14 +15,21 @@ fun NavGraph() {
     NavHost(navController, startDestination = "deviceList") {
         composable("deviceList") {
             DeviceList(
-                navToDeviceDetails = { navController.navigate("deviceDetails/$it") }
+                navToDeviceDetails = { device ->
+                    navController.currentBackStackEntry?.arguments?.putParcelable(
+                        "bt_device", device
+                    )
+                    navController.navigate("deviceDetails")
+                }
             )
         }
 
-        composable("deviceDetails/{address}") { backStackEntry ->
+        composable(
+            "deviceDetails",
+        ) {
             DeviceDetails(
                 popBackStack = { navController.popBackStack() },
-                address = backStackEntry.arguments!!.getString("address")!!
+                device = navController.previousBackStackEntry?.arguments?.getParcelable("bt_device")!!,
             )
         }
     }

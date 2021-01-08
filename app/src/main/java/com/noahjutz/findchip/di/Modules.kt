@@ -1,6 +1,7 @@
 package com.noahjutz.findchip.di
 
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import com.noahjutz.findchip.ui.device_details.DeviceDetailsViewModel
 import com.noahjutz.findchip.ui.device_list.DeviceListViewModel
 import com.noahjutz.findchip.ui.entry_point.FindchipAppViewModel
@@ -20,8 +21,8 @@ val koinModule = module {
         )
     }
 
-    viewModel { (address: String) ->
-        DeviceDetailsViewModel(address = address)
+    viewModel { (device: BluetoothDevice) ->
+        DeviceDetailsViewModel(device = device)
     }
 
     viewModel {
