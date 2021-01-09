@@ -6,11 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -108,4 +105,34 @@ fun AboutApp(
             )
         }
     }
+}
+
+@Composable
+fun DependencyDialog(
+    openUrl: (String) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = {},
+        title = { Text("Dependencies") },
+        text = {
+            ScrollableColumn {
+                ListItem(
+                    Modifier.clickable { openUrl("https://developer.android.com/jetpack/androidx/") },
+                    text = { Text("AndroidX") },
+                    secondaryText = { Text("Apache 2.0") }
+                )
+                ListItem(
+                    Modifier.clickable { openUrl("https://insert-koin.io/") },
+                    text = { Text("koin") },
+                    secondaryText = { Text("Apache 2.0") }
+                )
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = { /*TODO*/ }) {
+                Text("Dismiss")
+            }
+        }
+    )
 }
