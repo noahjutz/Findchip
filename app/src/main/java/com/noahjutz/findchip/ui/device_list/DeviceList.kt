@@ -46,9 +46,7 @@ fun DeviceList(
                 items(namedDevices) { device ->
                     ListItem(
                         Modifier.clickable { navToDeviceDetails(device) },
-                        text = {
-                            Text(device.name)
-                        },
+                        text = { Text(device.name) },
                         secondaryText = { Text(device.address.toString()) }
                     )
                 }
@@ -57,11 +55,8 @@ fun DeviceList(
                 }
                 items(unnamedDevices) { device ->
                     ListItem(
-                        Modifier.clickable { navToDeviceDetails(device) }
-                            .alpha(0.5f),
-                        text = {
-                            Text("Unknown")
-                        },
+                        Modifier.clickable { navToDeviceDetails(device) }.alpha(0.5f),
+                        text = { Text("Unknown") },
                         secondaryText = { Text(device.address.toString()) }
                     )
                 }
