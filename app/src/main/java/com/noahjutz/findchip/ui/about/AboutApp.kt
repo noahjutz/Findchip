@@ -47,6 +47,7 @@ fun AboutApp(
                     Text(stringResource(R.string.app_name))
                 }
             }
+
             Divider()
             ListItem(
                 Modifier.clickable {},
@@ -56,10 +57,18 @@ fun AboutApp(
             )
             ListItem(
                 Modifier.clickable {},
+                text = { Text("Version") },
+                secondaryText = { Text("0.0.1") },
+                icon = { Icon(Icons.Default.Update) },
+            )
+            ListItem(
+                Modifier.clickable {},
                 text = { Text("License") },
                 secondaryText = { Text("GPL-3.0") },
                 icon = { Icon(Icons.Default.LockOpen) },
             )
+
+            Divider()
             ListItem(
                 Modifier.clickable {},
                 text = { Text("Donate") },
@@ -77,12 +86,6 @@ fun AboutApp(
                 text = { Text("Contributing") },
                 secondaryText = { Text("Find out how to contribute!") },
                 icon = { Icon(Icons.Default.Create) },
-            )
-            ListItem(
-                Modifier.clickable {},
-                text = { Text("Version") },
-                secondaryText = { Text("0.0.1") },
-                icon = { Icon(Icons.Default.Update) },
             )
         }
     }
