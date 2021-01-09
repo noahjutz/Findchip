@@ -79,6 +79,12 @@ fun AboutApp(
                 secondaryText = { Text("GPL-3.0") },
                 icon = { Icon(Icons.Default.LockOpen) },
             )
+            ListItem(
+                Modifier.clickable {},
+                text = { Text("Dependencies") },
+                secondaryText = { Text("Open source licenses") },
+                icon = { Icon(Icons.Default.List) },
+            )
 
             Divider()
             ListItem(
