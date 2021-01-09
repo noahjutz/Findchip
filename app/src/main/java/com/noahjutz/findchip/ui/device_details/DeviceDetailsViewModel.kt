@@ -1,12 +1,16 @@
 package com.noahjutz.findchip.ui.device_details
 
 import android.app.Application
-import android.bluetooth.*
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
+import android.bluetooth.BluetoothProfile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noahjutz.findchip.util.BTConstants
 import com.noahjutz.findchip.util.hexStringToByteArray
+import com.noahjutz.findchip.util.write
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,32 +34,33 @@ class DeviceDetailsViewModel(
         }
     }
 
-    private fun write(value: ByteArray) {
-        val serviceUUID = UUID.fromString(BTConstants.IFindU.serviceUUID)
-        val service: BluetoothGattService? = gatt.getService(serviceUUID)
-
-        val characteristicUUID = UUID.fromString(BTConstants.IFindU.characteristicUUID)
-        val characteristic = service?.getCharacteristic(characteristicUUID)
-
-        if (characteristic != null) {
-            characteristic.value = value
-            gatt.writeCharacteristic(characteristic)
-        }
-    }
 
     fun startBeep() {
-        write(hexStringToByteArray(BTConstants.IFindU.sigStartBeep))
+        gatt.write(
+            value = hexStringToByteArray(BTConstants.IFindU.sigStartBeep),
+            serviceUUID = UUID.fromString(BTConstants.IFindU.serviceUUID),
+            characteristicUUID = UUID.fromString(BTConstants.IFindU.characteristicUUID)
+        )
         _isBeeping.value = true
     }
 
     fun stopBeep() {
-        write(hexStringToByteArray(BTConstants.IFindU.sigStopBeep))
+        gatt.write(
+            value = hexStringToByteArray(BTConstants.IFindU.sigStopBeep),
+            serviceUUID = UUID.fromString(BTConstants.IFindU.serviceUUID),
+            characteristicUUID = UUID.fromString(BTConstants.IFindU.characteristicUUID)
+        )
         _isBeeping.value = false
     }
 
     fun toggleBeep() {
-        val payload = if (isBeeping.value) BTConstants.IFindU.sigStopBeep else BTConstants.IFindU.sigStartBeep
-        write(hexStringToByteArray(payload))
+        val payload =
+            if (isBeeping.value) BTConstants.IFindU.sigStopBeep else BTConstants.IFindU.sigStartBeep
+        gatt.write(
+            value = hexStringToByteArray(payload),
+            serviceUUID = UUID.fromString(BTConstants.IFindU.serviceUUID),
+            characteristicUUID = UUID.fromString(BTConstants.IFindU.characteristicUUID)
+        )
         _isBeeping.value = !isBeeping.value
     }
 
