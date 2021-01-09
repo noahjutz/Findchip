@@ -9,15 +9,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme.typography
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.noahjutz.findchip.R
@@ -33,32 +34,33 @@ fun AboutApp(
                     IconButton(onClick = popBackStack) { Icon(Icons.Default.ArrowBack) }
                 },
                 title = { Text("About") },
-                elevation = 0.dp
             )
         }
     ) {
         ScrollableColumn {
-            Row(
+            Box(
                 Modifier.fillMaxWidth()
-                    .clip(RoundedCornerShape(bottomLeft = 12.dp, bottomRight = 12.dp))
-                    .background(colors.primarySurface)
                     .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                contentAlignment = Alignment.Center
             ) {
-                Image(
-                    vectorResource(R.drawable.ic_launcher_foreground),
-                    modifier = Modifier.clip(CircleShape)
-                        .background(colorResource(R.color.ic_launcher_background))
-                )
-                Spacer(Modifier.preferredWidth(12.dp))
-                ProvideTextStyle(value = MaterialTheme.typography.h3) {
-                    Text(
-                        stringResource(R.string.app_name),
-                        color = contentColorFor(color = colors.primarySurface)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        imageVector = vectorResource(R.drawable.ic_launcher_foreground).copy(
+                            defaultWidth = 60.dp,
+                            defaultHeight = 60.dp
+                        ),
+                        modifier = Modifier.clip(CircleShape)
+                            .background(colorResource(R.color.ic_launcher_background)),
+                        contentScale = ContentScale.FillBounds
                     )
+                    Spacer(Modifier.preferredWidth(12.dp))
+                    ProvideTextStyle(typography.h3) {
+                        Text("Findchip")
+                    }
                 }
             }
 
+            Divider()
             ListItem(
                 Modifier.clickable {},
                 text = { Text("Author") },
