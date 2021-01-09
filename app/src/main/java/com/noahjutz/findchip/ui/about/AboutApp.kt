@@ -95,7 +95,7 @@ fun AboutApp(
                 icon = { Icon(Icons.Default.Favorite) },
             )
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { openUrl("https://github.com/noahjutz/Findchip") },
                 text = { Text("Source Code") },
                 secondaryText = { Text("GitHub") },
                 icon = { Icon(Icons.Default.Code) },
