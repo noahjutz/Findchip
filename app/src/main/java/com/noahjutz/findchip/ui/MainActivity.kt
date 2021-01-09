@@ -1,7 +1,9 @@
 package com.noahjutz.findchip.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
 import com.noahjutz.findchip.ui.entry_point.FindchipApp
 
+
 class MainActivity : AppCompatActivity() {
     private val requestLocationPermission = {
         ActivityCompat.requestPermissions(
@@ -21,13 +24,17 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun openUrl(url: String) =
+        startActivity(Intent(Intent.ACTION_VIEW).also { it.data = Uri.parse(url) })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme(colors = if (isSystemInDarkTheme()) darkColors() else lightColors()) {
                 Scaffold {
                     FindchipApp(
-                        requestLocationPermission = requestLocationPermission
+                        requestLocationPermission = requestLocationPermission,
+                        openUrl = ::openUrl
                     )
                 }
             }

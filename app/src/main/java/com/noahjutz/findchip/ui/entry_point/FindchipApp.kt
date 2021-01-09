@@ -13,7 +13,8 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun FindchipApp(
     viewModel: FindchipAppViewModel = getViewModel(),
-    requestLocationPermission: () -> Unit
+    requestLocationPermission: () -> Unit,
+    openUrl: (String) -> Unit
 ) {
     Scaffold {
         val isBluetoothDisabled by viewModel.isBluetoothDisabled.collectAsState(initial = true)
@@ -21,7 +22,7 @@ fun FindchipApp(
         when {
             isBluetoothDisabled -> BluetoothAlert { viewModel.enableBluetooth() }
             isLocationPermissionMissing -> LocationPermissionAlert(requestLocationPermission)
-            else -> NavGraph()
+            else -> NavGraph(openUrl)
         }
     }
 }

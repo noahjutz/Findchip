@@ -25,7 +25,8 @@ import com.noahjutz.findchip.R
 
 @Composable
 fun AboutApp(
-    popBackStack: () -> Unit
+    popBackStack: () -> Unit,
+    openUrl: (String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -74,7 +75,7 @@ fun AboutApp(
                 icon = { Icon(Icons.Default.Update) },
             )
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { openUrl("https://github.com/noahjutz/Findchip/blob/master/LICENSE") },
                 text = { Text("License") },
                 secondaryText = { Text("GPL-3.0") },
                 icon = { Icon(Icons.Default.LockOpen) },

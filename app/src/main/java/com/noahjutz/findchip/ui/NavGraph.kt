@@ -10,7 +10,9 @@ import com.noahjutz.findchip.ui.device_details.DeviceDetails
 import com.noahjutz.findchip.ui.device_list.DeviceList
 
 @Composable
-fun NavGraph() {
+fun NavGraph(
+    openUrl: (String) -> Unit
+) {
     val navController = rememberNavController()
 
     NavHost(navController, startDestination = "deviceList") {
@@ -33,7 +35,10 @@ fun NavGraph() {
         }
 
         composable("aboutApp") {
-            AboutApp(popBackStack = { navController.popBackStack() })
+            AboutApp(
+                popBackStack = { navController.popBackStack() },
+                openUrl = openUrl
+            )
         }
     }
 }
