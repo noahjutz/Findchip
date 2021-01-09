@@ -3,7 +3,6 @@ package com.noahjutz.findchip.ui.device_list
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -38,27 +36,18 @@ class DeviceListViewModel(
         }
     }
 
-    private val scanFilters = listOf(ScanFilter.Builder().build()) // TODO
-
-    private val scanSettings = ScanSettings.Builder().build() // TODO
-
     init {
         scan()
     }
 
     fun scan() {
         viewModelScope.launch {
-            if (_isScanning.value) bluetoothAdapter.bluetoothLeScanner.stopScan(scanCallback)
-
             _isScanning.value = true
-            bluetoothAdapter.bluetoothLeScanner.startScan(
-                scanFilters,
-                scanSettings,
-                scanCallback,
-            )
-            delay(5000)
+
             bluetoothAdapter.bluetoothLeScanner.stopScan(scanCallback)
-            _isScanning.value = false
-        }
+            bluetoothAdapter.bluetoothLeScanner.startScan(scanCallback)
+            delay(10000)
+            bluetoothAdapter.bluetoothLeScanner.stopScan(scanCallback)
+        }.invokeOnCompletion { _isScanning.value = false }
     }
 }
