@@ -93,11 +93,6 @@ class DeviceDetailsViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("DeviceDetailsVM", "onCleared")
         gatt.disconnect()
-    }
-
-    companion object {
-        private const val TAG = "DeviceDetailsViewModel"
     }
 }

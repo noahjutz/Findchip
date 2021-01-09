@@ -56,6 +56,6 @@ class DeviceListViewModel(
             delay(5000)
             bluetoothAdapter.bluetoothLeScanner.stopScan(scanCallback)
             _isScanning.value = false
-        }.invokeOnCompletion { Log.d("DeviceListViewModel", "scan completed") }
+        }
     }
 }
