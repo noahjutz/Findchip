@@ -2,16 +2,21 @@ package com.noahjutz.findchip.ui.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import com.noahjutz.findchip.R
 
 @Composable
@@ -29,8 +34,15 @@ fun AboutApp(
         }
     ) {
         ScrollableColumn {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(vectorResource(R.drawable.ic_launcher_foreground))
+            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    vectorResource(R.drawable.ic_launcher_foreground),
+                    modifier = Modifier
+                        .preferredSize(64.dp)
+                        .clip(CircleShape)
+                        .background(colorResource(R.color.ic_launcher_background))
+                )
+                Spacer(Modifier.preferredWidth(12.dp))
                 ProvideTextStyle(value = MaterialTheme.typography.h3) {
                     Text(stringResource(R.string.app_name))
                 }
