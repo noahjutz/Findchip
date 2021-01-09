@@ -89,7 +89,7 @@ fun AboutApp(
 
             Divider()
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { openUrl("https://liberapay.com/noahjutz/donate") },
                 text = { Text("Donate") },
                 secondaryText = { Text("Liberapay") },
                 icon = { Icon(Icons.Default.Favorite) },
