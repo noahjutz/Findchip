@@ -101,7 +101,7 @@ fun AboutApp(
                 icon = { Icon(Icons.Default.Code) },
             )
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { openUrl("https://github.com/noahjutz/Findchip/blob/master/README.md") },
                 text = { Text("Contributing") },
                 secondaryText = { Text("Find out how to contribute!") },
                 icon = { Icon(Icons.Default.Create) },
