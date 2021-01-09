@@ -17,18 +17,15 @@ fun NavGraph() {
         composable("deviceList") {
             DeviceList(
                 navToDeviceDetails = { device ->
-                    navController.currentBackStackEntry?.arguments?.putParcelable(
-                        "bt_device", device
-                    )
+                    navController.currentBackStackEntry
+                        ?.arguments?.putParcelable("bt_device", device)
                     navController.navigate("deviceDetails")
                 },
                 navToAboutApp = { navController.navigate("aboutApp") }
             )
         }
 
-        composable(
-            "deviceDetails",
-        ) {
+        composable("deviceDetails") {
             DeviceDetails(
                 popBackStack = { navController.popBackStack() },
                 device = navController.previousBackStackEntry?.arguments?.getParcelable("bt_device")!!,
