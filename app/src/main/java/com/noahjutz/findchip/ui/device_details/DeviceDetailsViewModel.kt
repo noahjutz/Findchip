@@ -37,8 +37,7 @@ class DeviceDetailsViewModel(
         val characteristicUUID = UUID.fromString(BTConstants.IFindU.characteristicUUID)
         val characteristic = service?.getCharacteristic(characteristicUUID)
 
-        characteristic?.let {
-            characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
+        if (characteristic != null) {
             characteristic.value = value
             gatt.writeCharacteristic(characteristic)
         }
