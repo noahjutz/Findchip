@@ -1,11 +1,11 @@
 package com.noahjutz.findchip.ui
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import com.noahjutz.findchip.ui.about.AboutApp
 import com.noahjutz.findchip.ui.device_details.DeviceDetails
 import com.noahjutz.findchip.ui.device_list.DeviceList
 
@@ -36,7 +36,7 @@ fun NavGraph() {
         }
 
         composable("aboutApp") {
-            Text("About App. TODO")
+            AboutApp(popBackStack = { navController.popBackStack() })
         }
     }
 }
