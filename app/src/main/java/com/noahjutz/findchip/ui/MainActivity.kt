@@ -2,7 +2,6 @@ package com.noahjutz.findchip.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.ui.platform.setContent
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.noahjutz.findchip.ui.entry_point.FindchipApp
 
 class MainActivity : AppCompatActivity() {

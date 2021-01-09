@@ -26,10 +26,10 @@ class FindchipAppViewModel(
         while (true) {
             emit(
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                        ContextCompat.checkSelfPermission(
-                            application.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION
-                        )
-                        != PackageManager.PERMISSION_GRANTED
+                    ContextCompat.checkSelfPermission(
+                    application.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                    != PackageManager.PERMISSION_GRANTED
             )
             delay(500)
         }

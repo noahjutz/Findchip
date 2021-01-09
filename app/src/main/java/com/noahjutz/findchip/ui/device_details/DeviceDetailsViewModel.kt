@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothProfile
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noahjutz.findchip.util.BTConstants
@@ -33,7 +32,6 @@ class DeviceDetailsViewModel(
             _rssi.value = rssi
         }
     }
-
 
     fun startBeep() {
         gatt.write(
