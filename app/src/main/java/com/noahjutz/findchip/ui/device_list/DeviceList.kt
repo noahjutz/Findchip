@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.noahjutz.findchip.R
@@ -38,14 +39,28 @@ fun DeviceList(
             }
         }
     ) {
-        val devices by viewModel.devices.collectAsState()
-        if (devices.isNotEmpty()) {
+        val namedDevices by viewModel.namedDevices.collectAsState(emptyList())
+        val unnamedDevices by viewModel.unnamedDevices.collectAsState(emptyList())
+        if (namedDevices.isNotEmpty() || unnamedDevices.isNotEmpty()) {
             LazyColumn {
-                items(devices) { device ->
+                items(namedDevices) { device ->
                     ListItem(
                         Modifier.clickable { navToDeviceDetails(device) },
                         text = {
-                            Text(device.name?.takeIf { it.isNotBlank() } ?: "Unnamed Device")
+                            Text(device.name)
+                        },
+                        secondaryText = { Text(device.address.toString()) }
+                    )
+                }
+                item {
+                    Divider()
+                }
+                items(unnamedDevices) { device ->
+                    ListItem(
+                        Modifier.clickable { navToDeviceDetails(device) }
+                            .alpha(0.5f),
+                        text = {
+                            Text("Unknown")
                         },
                         secondaryText = { Text(device.address.toString()) }
                     )

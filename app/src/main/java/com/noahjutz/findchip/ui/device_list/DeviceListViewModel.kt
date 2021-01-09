@@ -11,6 +11,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DeviceListViewModel(
@@ -18,6 +20,8 @@ class DeviceListViewModel(
 ) : ViewModel() {
     private val _devices = MutableStateFlow(emptyList<BluetoothDevice>())
     val devices = _devices.asStateFlow()
+    val namedDevices = devices.map { it.filter { it.name != null } }
+    val unnamedDevices = devices.map { it.filter { it.name == null } }
 
     private val _isScanning = MutableStateFlow(false)
     val isScanning = _isScanning.asStateFlow()
