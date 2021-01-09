@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -22,7 +22,8 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun DeviceList(
     viewModel: DeviceListViewModel = getViewModel(),
-    navToDeviceDetails: (BluetoothDevice) -> Unit
+    navToDeviceDetails: (BluetoothDevice) -> Unit,
+    navToAboutApp: () -> Unit,
 ) {
     val isScanning by viewModel.isScanning.collectAsState()
     Scaffold(
@@ -31,7 +32,27 @@ fun DeviceList(
                 TopAppBar(
                     title = { Text("Available Devices") },
                     navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground)) } },
-                    actions = { IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) } }
+                    actions = {
+                        IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) }
+                        var expanded by remember { mutableStateOf(false) }
+                        DropdownMenu(
+                            toggle = {
+                                IconButton(onClick = { expanded = true }) {
+                                    Icon(Icons.Default.MoreVert)
+                                }
+                            },
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            DropdownMenuItem(onClick = navToAboutApp) {
+                                Row {
+                                    Icon(Icons.Default.Info)
+                                    Spacer(Modifier.preferredWidth(8.dp))
+                                    Text("About")
+                                }
+                            }
+                        }
+                    }
                 )
                 if (isScanning) {
                     LinearProgressIndicator(Modifier.fillMaxWidth())

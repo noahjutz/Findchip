@@ -1,5 +1,6 @@
 package com.noahjutz.findchip.ui
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,7 +21,8 @@ fun NavGraph() {
                         "bt_device", device
                     )
                     navController.navigate("deviceDetails")
-                }
+                },
+                navToAboutApp = { navController.navigate("aboutApp") }
             )
         }
 
@@ -31,6 +33,10 @@ fun NavGraph() {
                 popBackStack = { navController.popBackStack() },
                 device = navController.previousBackStackEntry?.arguments?.getParcelable("bt_device")!!,
             )
+        }
+
+        composable("aboutApp") {
+            Text("About App. TODO")
         }
     }
 }
