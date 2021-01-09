@@ -31,7 +31,7 @@ fun DeviceDetails(
         topBar = {
             TopAppBar(
                 navigationIcon = { IconButton(onClick = popBackStack) { Icon(Icons.Default.ArrowBack) } },
-                title = { Text("DeviceDetails") }
+                title = { Text(viewModel.deviceName) }
             )
         },
         floatingActionButton = {

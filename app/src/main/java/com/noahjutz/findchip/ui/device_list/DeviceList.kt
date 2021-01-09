@@ -29,7 +29,7 @@ fun DeviceList(
         topBar = {
             Column {
                 TopAppBar(
-                    title = { Text("DeviceList") },
+                    title = { Text("Available Devices") },
                     navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground)) } },
                     actions = { IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) } }
                 )

@@ -21,6 +21,8 @@ class DeviceDetailsViewModel(
     device: BluetoothDevice,
     application: Application,
 ) : ViewModel() {
+    val deviceName = device.name?.takeIf { it.isNotBlank() } ?: "Unknown Device"
+
     private val gattCallback = object : BluetoothGattCallback() {
         override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
             super.onConnectionStateChange(gatt, status, newState)
