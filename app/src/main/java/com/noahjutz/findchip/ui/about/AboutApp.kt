@@ -89,7 +89,7 @@ fun AboutApp(
             ListItem(
                 Modifier.clickable {},
                 text = { Text("Version") },
-                secondaryText = { Text("0.0.1") },
+                secondaryText = { Text("0.1.0") },
                 icon = { Icon(Icons.Default.Update) },
             )
             ListItem(
