@@ -10,7 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +35,13 @@ fun AboutApp(
             )
         }
     ) {
+        var showDependencyDialog by remember { mutableStateOf(false) }
+        when {
+            showDependencyDialog -> DependencyDialog(
+                openUrl = openUrl,
+                onDismiss = { showDependencyDialog = false }
+            )
+        }
         ScrollableColumn {
             Box(
                 Modifier.fillMaxWidth()
@@ -84,7 +91,7 @@ fun AboutApp(
                 },
             )
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { showDependencyDialog = true },
                 text = { Text("Dependencies") },
                 secondaryText = { Text("Open source licenses") },
                 icon = { Icon(Icons.Default.List) },
