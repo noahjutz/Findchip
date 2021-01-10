@@ -76,6 +76,12 @@ fun AboutApp(
                 text = { Text("License") },
                 secondaryText = { Text("GPL-3.0") },
                 icon = { Icon(Icons.Default.LockOpen) },
+                trailing = {
+                    Icon(
+                        Icons.Default.Launch,
+                        tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                    )
+                },
             )
             ListItem(
                 Modifier.clickable {},
@@ -96,18 +102,36 @@ fun AboutApp(
                 text = { Text("Donate") },
                 secondaryText = { Text("Liberapay") },
                 icon = { Icon(Icons.Default.Favorite) },
+                trailing = {
+                    Icon(
+                        Icons.Default.Launch,
+                        tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                    )
+                },
             )
             ListItem(
                 Modifier.clickable { openUrl("https://github.com/noahjutz/Findchip") },
                 text = { Text("Source Code") },
                 secondaryText = { Text("GitHub") },
                 icon = { Icon(Icons.Default.Code) },
+                trailing = {
+                    Icon(
+                        Icons.Default.Launch,
+                        tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                    )
+                },
             )
             ListItem(
                 Modifier.clickable { openUrl("https://github.com/noahjutz/Findchip/blob/master/README.md") },
                 text = { Text("Contributing") },
                 secondaryText = { Text("Find out how to contribute!") },
                 icon = { Icon(Icons.Default.Create) },
+                trailing = {
+                    Icon(
+                        Icons.Default.Launch,
+                        tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                    )
+                },
             )
         }
     }
@@ -126,12 +150,24 @@ fun DependencyDialog(
                 ListItem(
                     Modifier.clickable { openUrl("https://developer.android.com/jetpack/androidx/") },
                     text = { Text("AndroidX") },
-                    secondaryText = { Text("Apache 2.0") }
+                    secondaryText = { Text("Apache 2.0") },
+                    trailing = {
+                        Icon(
+                            Icons.Default.Launch,
+                            tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                        )
+                    },
                 )
                 ListItem(
                     Modifier.clickable { openUrl("https://insert-koin.io/") },
                     text = { Text("koin") },
-                    secondaryText = { Text("Apache 2.0") }
+                    secondaryText = { Text("Apache 2.0") },
+                    trailing = {
+                        Icon(
+                            Icons.Default.Launch,
+                            tint = AmbientContentColor.current.copy(alpha = 0.5f)
+                        )
+                    },
                 )
             }
         },
