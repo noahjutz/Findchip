@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private fun openUrl(url: String) =
         startActivity(Intent(Intent.ACTION_VIEW).also { it.data = Uri.parse(url) })
 
+    private fun enableLocation() =
+        startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,7 +38,8 @@ class MainActivity : AppCompatActivity() {
                 Scaffold {
                     FindchipApp(
                         requestLocationPermission = requestLocationPermission,
-                        openUrl = ::openUrl
+                        openUrl = ::openUrl,
+                        enableLocation = ::enableLocation
                     )
                 }
             }
