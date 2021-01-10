@@ -70,6 +70,16 @@ fun AboutApp(
             }
 
             Divider()
+
+            Card(
+                Modifier.padding(16.dp)
+            ) {
+                Text(
+                    "Findchip is an open-source replacement for proprietary location tag apps. It displays signal strength based on the RSSI and allows for sending signals to start/stop beeping. The BLE communication was reverse engineered using Wireshark.",
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+
             ListItem(
                 Modifier.clickable {},
                 text = { Text("Author") },
