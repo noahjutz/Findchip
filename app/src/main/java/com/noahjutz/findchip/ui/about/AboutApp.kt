@@ -36,10 +36,14 @@ fun AboutApp(
         }
     ) {
         var showDependencyDialog by remember { mutableStateOf(false) }
+        var showSupportedDevicesDialog by remember { mutableStateOf(false) }
         when {
             showDependencyDialog -> DependencyDialog(
                 openUrl = openUrl,
                 onDismiss = { showDependencyDialog = false }
+            )
+            showSupportedDevicesDialog -> SupportedDevicesDialog(
+                onDismiss = { showSupportedDevicesDialog = false }
             )
         }
         ScrollableColumn {
@@ -97,7 +101,7 @@ fun AboutApp(
                 icon = { Icon(Icons.Default.List) },
             )
             ListItem(
-                Modifier.clickable {},
+                Modifier.clickable { showSupportedDevicesDialog = true },
                 text = { Text("Supported devices") },
                 secondaryText = { Text("1 supported device") },
                 icon = { Icon(Icons.Default.Check) },
@@ -176,6 +180,29 @@ fun DependencyDialog(
                         )
                     },
                 )
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Dismiss")
+            }
+        }
+    )
+}
+
+@Composable
+fun SupportedDevicesDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Supported Devices") },
+        text = {
+            ScrollableColumn {
+                ListItem(
+                    Modifier.clickable { },
+                    text = { Text("iFindU") },
+                )
+                Text("If your device is not on the list, please consider contributing.")
             }
         },
         confirmButton = {},
