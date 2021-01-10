@@ -83,6 +83,12 @@ fun AboutApp(
                 secondaryText = { Text("Open source licenses") },
                 icon = { Icon(Icons.Default.List) },
             )
+            ListItem(
+                Modifier.clickable {},
+                text = { Text("Supported devices") },
+                secondaryText = { Text("1 supported device") },
+                icon = { Icon(Icons.Default.Check) },
+            )
 
             Divider()
             ListItem(
