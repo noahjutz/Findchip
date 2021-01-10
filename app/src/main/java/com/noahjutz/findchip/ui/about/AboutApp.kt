@@ -115,10 +115,11 @@ fun AboutApp(
 
 @Composable
 fun DependencyDialog(
-    openUrl: (String) -> Unit
+    openUrl: (String) -> Unit,
+    onDismiss: () -> Unit
 ) {
     AlertDialog(
-        onDismissRequest = {},
+        onDismissRequest = onDismiss,
         title = { Text("Dependencies") },
         text = {
             ScrollableColumn {
@@ -136,7 +137,7 @@ fun DependencyDialog(
         },
         confirmButton = {},
         dismissButton = {
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = onDismiss) {
                 Text("Dismiss")
             }
         }
