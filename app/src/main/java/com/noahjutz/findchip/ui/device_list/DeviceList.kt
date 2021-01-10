@@ -31,7 +31,7 @@ fun DeviceList(
             Column {
                 TopAppBar(
                     title = { Text("Available Devices") },
-                    navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground)) } },
+                    navigationIcon = { IconButton(onClick = {}) { Image(vectorResource(id = R.drawable.ic_launcher_foreground_sysicon)) } },
                     actions = {
                         IconButton(onClick = { viewModel.scan() }) { Icon(Icons.Default.Refresh) }
                         var expanded by remember { mutableStateOf(false) }
