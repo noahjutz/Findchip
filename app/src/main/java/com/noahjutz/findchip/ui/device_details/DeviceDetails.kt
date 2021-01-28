@@ -1,7 +1,6 @@
 package com.noahjutz.findchip.ui.device_details
 
 import android.bluetooth.BluetoothDevice
-import androidx.compose.animation.animate
 import androidx.compose.animation.core.*
 import androidx.compose.animation.transition
 import androidx.compose.foundation.Canvas
@@ -121,7 +120,8 @@ fun SignalStrengthIndicatorBackground() {
 @Composable
 fun SignalStrengthIndicatorForeground(signalStrength: Int) {
     val color = MaterialTheme.colors.primary
-    val radius = animate((signalStrength * 3).toFloat(), animSpec = TweenSpec(2000))
+    val radius =
+        animateAsState((signalStrength * 3).toFloat(), animationSpec = TweenSpec(2000)).value
     Canvas(Modifier.preferredSize(300.dp)) {
         drawCircle(
             color = color,
